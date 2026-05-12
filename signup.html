@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edem | Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root { --bg:#0a0a0a; --surface:#141414; --accent:#c5a059; --text:#fff; --muted:#b8b8b8; --border:rgba(197,160,89,.35); }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      body { min-height:100vh; font-family:"Inter",sans-serif; background:radial-gradient(circle at top,#1a1a1a 0%,var(--bg) 45%); color:var(--text); display:grid; place-items:center; padding:1rem; }
+      .auth-wrap { width:min(470px,100%); background:var(--surface); border:1px solid rgba(255,255,255,.08); border-radius:.8rem; padding:1.4rem; box-shadow:0 18px 50px rgba(0,0,0,.35); }
+      .brand { font-family:"Cormorant Garamond",serif; color:var(--accent); letter-spacing:.18em; font-size:1.5rem; margin-bottom:.3rem; }
+      .title { font-family:"Cormorant Garamond",serif; font-size:2rem; margin-bottom:.6rem; }
+      .order-note { color:var(--muted); margin-bottom:1rem; font-size:.95rem; }
+      .field { display:grid; gap:.4rem; margin-bottom:.75rem; }
+      .field label { color:#ddd; font-size:.9rem; }
+      .field input { width:100%; border:1px solid rgba(255,255,255,.12); background:#0e0e0e; color:#fff; padding:.7rem .8rem; transition:border-color .25s ease, transform .25s ease; }
+      .field input:focus { outline:none; border-color:var(--accent); transform:translateY(-1px); }
+      .submit-btn { width:100%; border:1px solid var(--accent); background:var(--accent); color:#111; padding:.65rem; font-weight:600; cursor:pointer; margin-top:.3rem; transition:transform .25s ease, filter .25s ease; }
+      .submit-btn:hover { transform:translateY(-2px); filter:brightness(1.08); }
+      .auth-divider { display:flex; align-items:center; gap:.6rem; color:var(--muted); font-size:.85rem; margin:1rem 0 .8rem; }
+      .auth-divider::before, .auth-divider::after { content:""; height:1px; flex:1; background:rgba(255,255,255,.12); }
+      .google-btn { width:100%; border:1px solid rgba(255,255,255,.2); background:#111; color:#fff; padding:.65rem; cursor:pointer; transition:transform .25s ease, border-color .25s ease; }
+      .google-btn:hover { transform:translateY(-2px); border-color:var(--accent); }
+      .switch-text { color:var(--muted); margin-top:1rem; }
+      .switch-text a, .back-link { color:var(--accent); text-decoration:none; }
+      .back-link { display:inline-block; margin-top:.8rem; }
+    </style>
+  </head>
+  <body data-auth-mode="signup">
+    <div class="auth-wrap">
+      <p class="brand">EDEM</p>
+      <h1 class="title">Sign Up</h1>
+      <p class="order-note" id="orderNote">Create account to continue your order.</p>
+
+      <form id="signupForm">
+        <div class="field">
+          <label for="signupName">Full Name</label>
+          <input id="signupName" type="text" required />
+        </div>
+        <div class="field">
+          <label for="signupEmail">Email</label>
+          <input id="signupEmail" type="email" required />
+        </div>
+        <div class="field">
+          <label for="signupPassword">Password</label>
+          <input id="signupPassword" type="password" required />
+        </div>
+        <button class="submit-btn" type="submit">Create Account & Continue</button>
+      </form>
+      <div class="auth-divider">or</div>
+      <button id="googleAuthBtn" class="google-btn" type="button">
+        Continue with Google
+      </button>
+      <p id="authMessage" class="switch-text"></p>
+
+      <p class="switch-text">
+        Already have an account?
+        <a id="toSigninLink" href="signin.html">Sign in</a>
+      </p>
+      <a class="back-link" href="index.html">← Back to Edem</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script>
+      gsap.fromTo(".auth-wrap", { y: 36, opacity: 0, scale: 0.98 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out" });
+      gsap.from(".brand, .title, .order-note, .field, .submit-btn, .switch-text, .back-link", { y: 12, opacity: 0, duration: 0.55, stagger: 0.07, delay: 0.2, ease: "power2.out" });
+    </script>
+    <script type="module" src="auth.js"></script>
+  </body>
+</html>

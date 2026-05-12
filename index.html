@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edem | Premium Restaurant Experience</title>
+    <meta
+      name="description"
+      content="Edem - A high-end premium restaurant with exquisite dining, events, and reservations."
+    />
+
+    <!-- Fonts: Sophisticated serif for headings + clean sans-serif for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  </head>
+  <body>
+    <!-- Elegant pre-loader -->
+    <div class="loader" id="loader">
+      <div class="loader-inner">
+        <p class="loader-subtitle">Exclusive Culinary Experience</p>
+        <h1 class="loader-title">
+          <span>E</span><span>D</span><span>E</span><span>M</span>
+        </h1>
+      </div>
+    </div>
+
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <header class="site-header">
+          <nav class="container navbar">
+            <a href="#" class="brand">EDEM</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+              <span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+              <li><a href="#hero">Home</a></li>
+              <li><a href="#story">About Us</a></li>
+              <li><a href="#popular">Menu</a></li>
+              <li><a href="#events">Events</a></li>
+              <li><a href="#reservation">Reservation</a></li>
+              <li id="adminLink" style="display: none;"><a href="admin.html" style="color: var(--accent);">Admin Panel</a></li>
+              <li id="userLink" style="display: none;"><span id="userName" style="color: var(--accent); margin-right: 1rem;"></span><a href="#" id="logoutBtn">Logout</a></li>
+              <li id="loginLink"><a href="signin.html">Login</a></li>
+            </ul>
+          </nav>
+        </header>
+
+        <main>
+          <section class="hero section" id="hero">
+            <div class="hero-bg-orb hero-orb-left"></div>
+            <div class="hero-bg-orb hero-orb-right"></div>
+            <div class="hero-image-wrap">
+              <img
+                class="hero-image"
+                src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=80"
+                alt="Top view grilled steak on skillet"
+              />
+            </div>
+            <div class="container hero-content">
+              <p class="eyebrow">Refined Taste Since 2009</p>
+              <h1 class="hero-title">Welcome to Edem Restaurant</h1>
+              <p class="hero-description">
+                Immerse yourself in elevated dining where each plate is crafted
+                with art, precision, and unforgettable flavor.
+              </p>
+              <a href="#reservation" class="btn btn-gold">Book a Table</a>
+            </div>
+          </section>
+
+          <section class="story section reveal-up" id="story">
+            <div class="container split-layout">
+              <div class="story-content">
+                <p class="eyebrow">Our Story</p>
+                <h2 class="section-title">A Destination of Taste & Elegance</h2>
+                <p>
+                  Edem is where classic hospitality meets contemporary cuisine.
+                  Our chefs celebrate locally sourced ingredients and transform
+                  them into premium dining experiences in a warm, artistic
+                  environment.
+                </p>
+                <p>
+                  Designed for intimate dinners and memorable celebrations,
+                  every detail is curated to deliver luxury on every visit.
+                </p>
+                <a href="#reservation" class="btn btn-outline">Reserve your table</a>
+              </div>
+              <div class="story-image-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1300&q=80"
+                  alt="Scenic premium restaurant interior"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section class="popular section" id="popular">
+            <div class="container">
+              <p class="eyebrow reveal-up">Our Selection</p>
+              <h2 class="section-title reveal-up">Guest Favorites</h2>
+              <div class="dish-filters reveal-up" id="dishFilters">
+                <button class="filter-btn active" data-filter="all">All Items</button>
+                <button class="filter-btn" data-filter="breakfast">Breakfast</button>
+                <button class="filter-btn" data-filter="dinner">Dinner</button>
+                <button class="filter-btn" data-filter="lunch">Lunch</button>
+              </div>
+              <div class="dishes-row" id="dishesContainer">
+                <!-- Fallback items -->
+                <article class="dish-card reveal-up" data-category="dinner">
+                  <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=900&q=80" alt="Bolognese">
+                  <div class="dish-info">
+                    <div class="dish-heading"><h3>Bolognese</h3><span>$22</span></div>
+                    <p>Rich slow-cooked tomato ragout and aged parmesan.</p>
+                    <button class="dish-buy-btn" data-dish="Bolognese" data-price="$22">Buy Now</button>
+                  </div>
+                </article>
+                <article class="dish-card reveal-up" data-category="dinner">
+                  <img src="https://images.unsplash.com/photo-1600803907087-f56d462fd26b?auto=format&fit=crop&w=900&q=80" alt="Green Carbonara">
+                  <div class="dish-info">
+                    <div class="dish-heading"><h3>Green Carbonara</h3><span>$24</span></div>
+                    <p>Velvety herb-infused pasta with smoked pancetta.</p>
+                    <button class="dish-buy-btn" data-dish="Green Carbonara" data-price="$24">Buy Now</button>
+                  </div>
+                </article>
+                <article class="dish-card reveal-up" data-category="breakfast">
+                  <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=900&q=80" alt="Royal Avocado Toast">
+                  <div class="dish-info">
+                    <div class="dish-heading"><h3>Royal Avocado Toast</h3><span>$16</span></div>
+                    <p>Sourdough, poached egg, chili flakes, micro herbs.</p>
+                    <button class="dish-buy-btn" data-dish="Royal Avocado Toast" data-price="$16">Buy Now</button>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="services section" id="events">
+            <div class="container">
+              <p class="eyebrow reveal-up">Services & Events</p>
+              <h2 class="section-title reveal-up">Exceptional Hospitality</h2>
+              <div class="services-grid">
+                <article class="service-card reveal-up">
+                  <div class="icon">🎉</div>
+                  <h3>Events</h3>
+                  <p>Private celebrations, corporate evenings, and ceremonies.</p>
+                </article>
+                <article class="service-card reveal-up">
+                  <div class="icon">🍽️</div>
+                  <h3>Special Menus</h3>
+                  <p>Bespoke tasting menus designed for your occasion.</p>
+                </article>
+                <article class="service-card reveal-up">
+                  <div class="icon">🚚</div>
+                  <h3>Delivery</h3>
+                  <p>Signature dishes delivered with premium packaging.</p>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="testimonials section" id="testimonials">
+            <div class="container">
+              <p class="eyebrow reveal-up">Testimonials</p>
+              <h2 class="section-title reveal-up">What Our Visitors Say</h2>
+              <div class="testimonial-slider reveal-up" id="testimonialSlider">
+                <article class="testimonial active">
+                  <div class="stars">★★★★★</div>
+                  <p>“From ambiance to plating, Edem feels like a true Michelin-level journey.”</p>
+                  <h4>- Sara K.</h4>
+                </article>
+                <article class="testimonial">
+                  <div class="stars">★★★★★</div>
+                  <p>“Elegant, warm, and absolutely delicious.”</p>
+                  <h4>- Daniel R.</h4>
+                </article>
+              </div>
+              <div class="slider-controls reveal-up">
+                <button id="prevTestimonial">Prev</button>
+                <button id="nextTestimonial">Next</button>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer class="site-footer section" id="reservation">
+          <div class="container footer-grid">
+            <div class="reservation-form-wrap reveal-up">
+              <p class="eyebrow">Book Your Table</p>
+              <h2 class="section-title">Reservation</h2>
+              <form class="reservation-form" id="reservationForm">
+                <input type="text" id="resName" placeholder="Your Name" required />
+                <input type="email" id="resEmail" placeholder="Email Address" required />
+                <textarea id="resMessage" placeholder="Special Request"></textarea>
+                <button type="submit" class="btn btn-gold" id="resSubmitBtn">Confirm Reservation</button>
+              </form>
+            </div>
+            <div class="footer-info reveal-up">
+              <h3>Edem Restaurant</h3>
+              <p>Luxury dining crafted for unforgettable evenings.</p>
+              <p class="contact">+92309-9938363</p>
+              <div class="socials">
+                <a href="https://www.linkedin.com/in/code-with-sohail-afridi-36b6b0378/">Linkedin</a>
+                <a href="https://www.tiktok.com/@code.by.me3?_r=1&_t=ZT-96Ewfz0fjCQ">Tiktok</a>
+                <a href="https://youtube.com/@code_with_sohail_afridi?si=HvGiT4e7ln06AMN2">YouTube</a>
+              </div>
+            </div>
+          </div>
+          <p class="copyright">© 2026 Edem. All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+    
+    <!-- Order Modal -->
+    <div class="order-modal" id="orderModal">
+      <div class="order-modal-content">
+        <button class="close-modal" id="closeModal">&times;</button>
+        <p class="eyebrow">Confirm Your Order</p>
+        <h2 id="modalDishName">Dish Name</h2>
+        <p class="modal-price" id="modalDishPrice">$0.00</p>
+        <div class="order-options">
+          <button id="orderWhatsApp" class="order-btn wa-btn">WhatsApp</button>
+          <button id="orderEmail" class="order-btn email-btn">Email</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="index-auth.js"></script>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

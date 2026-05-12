@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edem Admin | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="container navbar">
+            <a href="index.html" class="brand">EDEM ADMIN</a>
+            <ul class="nav-links">
+                <li><a href="index.html">View Site</a></li>
+                <li><a href="#" id="adminLogout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="admin-dashboard">
+        <aside class="admin-sidebar">
+            <h2>Dashboard</h2>
+            <nav class="admin-nav">
+                <button class="admin-nav-btn active" data-target="dishesSection">Manage Guest Favorites</button>
+            </nav>
+        </aside>
+
+        <section class="admin-content">
+            <!-- Dishes Section -->
+            <div id="dishesSection" class="admin-section active">
+                <div class="admin-header">
+                    <h3>Guest Favorites (Menu Items)</h3>
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="btn btn-outline" id="restoreDataBtn">Restore Original Items</button>
+                        <button class="btn btn-gold" id="toggleDishForm">Add New Item</button>
+                    </div>
+                </div>
+
+                <div class="admin-form-card" id="dishFormWrap" style="display: none;">
+                    <form id="dishForm" class="admin-form">
+                        <input type="hidden" id="dishId">
+                        <div class="form-group">
+                            <label for="dishName">Item Name</label>
+                            <input type="text" id="dishName" placeholder="e.g. Bolognese" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dishPrice">Price ($)</label>
+                            <input type="text" id="dishPrice" placeholder="e.g. $22" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dishCategory">Category (For Filtering)</label>
+                            <select id="dishCategory" required>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="dinner" selected>Dinner</option>
+                                <option value="lunch">Lunch</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dishImage">Image URL</label>
+                            <input type="url" id="dishImage" placeholder="https://images.unsplash.com/..." required>
+                        </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label for="dishDesc">Short Description</label>
+                            <textarea id="dishDesc" placeholder="Rich slow-cooked tomato ragout..." required></textarea>
+                        </div>
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <button type="submit" class="btn btn-gold" id="dishSubmitBtn">Save Item</button>
+                            <button type="button" class="btn btn-outline" id="cancelDishForm">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="admin-items-grid" id="adminDishesList">
+                    <!-- Dynamic dishes will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
