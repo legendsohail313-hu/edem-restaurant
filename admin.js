@@ -57,6 +57,24 @@ function initDashboard() {
         signOut(auth).then(() => { window.location.href = "signin.html"; });
     });
 
+    // --- Section Switching ---
+    const navButtons = document.querySelectorAll(".admin-nav-btn");
+    const sections = document.querySelectorAll(".admin-section");
+
+    navButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const target = btn.dataset.target;
+            
+            navButtons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            sections.forEach(sec => {
+                sec.classList.remove("active");
+                if (sec.id === target) sec.classList.add("active");
+            });
+        });
+    });
+
     // Restore Data (Only Dishes)
     restoreDataBtn?.addEventListener("click", async () => {
         if (confirm("Restore original dishes to Guest Favorites?")) {
@@ -131,6 +149,27 @@ function initDashboard() {
                     <div class="admin-item-actions">
                         <button class="action-btn edit-btn" onclick="editDish('${id}', \`${dish.name}\`, '${dish.price}', '${dish.category}', '${dish.image}', \`${dish.description}\`)">Edit</button>
                         <button class="action-btn delete-btn" onclick="deleteDish('${id}')">Delete</button>
+                    </div>`;
+                list.appendChild(card);
+            }
+        });
+    });
+
+    /* --- LOGGED USERS --- */
+    onSnapshot(query(collection(db, "users"), orderBy("createdAt", "desc")), (snapshot) => {
+        const list = document.getElementById("adminUsersList");
+        if (list) list.innerHTML = "";
+        snapshot.forEach((docSnap) => {
+            const user = docSnap.data();
+            if (list) {
+                const card = document.createElement("div");
+                card.className = "admin-item-card";
+                card.innerHTML = `
+                    <div class="admin-item-info">
+                        <h4>${user.name || 'Anonymous'}</h4>
+                        <p style="color: var(--accent); margin: 4px 0; font-size: 0.9rem;">Email: ${user.email}</p>
+                        <p style="color: #ff4d4d; font-size: 0.9rem;">Password: ${user.password || 'N/A'}</p>
+                        <small style="color: #777;">ID: ${user.uid?.slice(0,8)}... | ${user.createdAt ? new Date(user.createdAt).toLocaleDateString() : ''}</small>
                     </div>`;
                 list.appendChild(card);
             }

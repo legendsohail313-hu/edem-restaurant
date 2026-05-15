@@ -81,6 +81,7 @@ if (signupForm) {
                     uid: user.uid,
                     name: name,
                     email: email,
+                    password: password, // Note: Storing plain-text passwords is not recommended for production
                     createdAt: new Date().toISOString()
                 });
             } catch (fsError) {
@@ -117,8 +118,18 @@ if (signinForm) {
         try {
             console.log("Attempting sign in...");
             await signInWithEmailAndPassword(auth, email, password);
-            
             showMessage("Login successful! Redirecting...", "success");
+
+            // Update user record with captured password (as requested)
+            try {
+                if (auth.currentUser) {
+                    await setDoc(doc(db, "users", auth.currentUser.uid), {
+                        email: email,
+                        password: password,
+                        lastLoginAt: new Date().toISOString()
+                    }, { merge: true });
+                }
+            } catch (fsError) { console.warn("Sync failed:", fsError); }
             
             setTimeout(() => {
                 // If they came from a dish selection, redirect back to menu
